@@ -2,10 +2,11 @@ module github.com/brass-software/server
 
 go 1.22.1
 
+require github.com/mikerybka/util v0.0.0-20240518170230-1918ba27a5d0
+
 require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
 	github.com/kr/fs v0.1.0 // indirect
-	github.com/mikerybka/util v0.0.0-20240517230316-d53d257ea755 // indirect
 	github.com/pkg/sftp v1.13.6 // indirect
 	golang.org/x/crypto v0.23.0 // indirect
 	golang.org/x/net v0.25.0 // indirect
