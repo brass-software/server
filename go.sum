@@ -10,6 +10,10 @@ github.com/mikerybka/util v0.0.0-20240517230316-d53d257ea755 h1:6nlgowmE396jK48P
 github.com/mikerybka/util v0.0.0-20240517230316-d53d257ea755/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
 github.com/mikerybka/util v0.0.0-20240518170230-1918ba27a5d0 h1:guKPzJg8AXdJR6cmWUfUc2yqMyoId2GMpF5lULdEy68=
 github.com/mikerybka/util v0.0.0-20240518170230-1918ba27a5d0/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
+github.com/mikerybka/util v0.0.0-20240518172024-18e09929975a h1:Ba8wXfvcqiAEBplYCwZCLvF22Y305IkN14HIJQVGYuQ=
+github.com/mikerybka/util v0.0.0-20240518172024-18e09929975a/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
+github.com/mikerybka/util v0.0.0-20240519103217-cfb7c088617a h1:EiGpMBHNK58mb1a/gST8YJAPSu/r+kRM0Zrw83chOuI=
+github.com/mikerybka/util v0.0.0-20240519103217-cfb7c088617a/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
 github.com/pkg/sftp v1.13.6 h1:JFZT4XbOU7l77xGSpOdW+pwIMqP044IyjXX6FGyEKFo=
 github.com/pkg/sftp v1.13.6/go.mod h1:tz1ryNURKu77RL+GuCzmoJYxQczL3wLNNpPWagdg4Qk=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
