@@ -16,6 +16,8 @@ github.com/mikerybka/util v0.0.0-20240519103217-cfb7c088617a h1:EiGpMBHNK58mb1a/
 github.com/mikerybka/util v0.0.0-20240519103217-cfb7c088617a/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
 github.com/mikerybka/util v0.0.0-20240528131626-f053fdc2fa56 h1:Nef+/H6ROCRWz55gcbzoZSBmIPqU0oKFlLloyohVD8A=
 github.com/mikerybka/util v0.0.0-20240528131626-f053fdc2fa56/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
+github.com/mikerybka/util v0.0.0-20240602175127-2209a0c8ae67 h1:IJBKzPcfDmQZvb/6Y4cm3FsmbTFFI3FD4EzNs3R+DF4=
+github.com/mikerybka/util v0.0.0-20240602175127-2209a0c8ae67/go.mod h1:/3do1RIxE0FLCZT54e9qE+/zlnfkwtHeraoRGj1H8XM=
 github.com/pkg/sftp v1.13.6 h1:JFZT4XbOU7l77xGSpOdW+pwIMqP044IyjXX6FGyEKFo=
 github.com/pkg/sftp v1.13.6/go.mod h1:tz1ryNURKu77RL+GuCzmoJYxQczL3wLNNpPWagdg4Qk=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
