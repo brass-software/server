@@ -40,10 +40,7 @@ func main() {
 		dataDir = "data/schema.cafe"
 	}
 
-	go func() {
-		time.Sleep(time.Hour)
-		update()
-	}()
+	go updateInAnHour()
 
 	s := &util.MultiHostServer{
 		Hosts: map[string]http.Handler{
@@ -80,6 +77,11 @@ func main() {
 		},
 	}
 	panic(s.Start(email, certDir))
+}
+
+func updateInAnHour() {
+	time.Sleep(time.Hour)
+	update()
 }
 
 func update() {
