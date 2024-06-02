@@ -54,6 +54,32 @@ func main() {
 					},
 				},
 			},
+			"schema.cafe": &util.MultiUserApp{
+				Twilio: &util.TwilioClient{
+					AccountSID:  twilioAccountSID,
+					AuthToken:   twilioAuthToken,
+					PhoneNumber: twilioPhoneNumber,
+				},
+				AuthFiles: &util.LocalFileSystem{
+					Root: authDir,
+				},
+				App: &util.SchemaCafe{
+					Data: &util.LocalFileSystem{
+						Root: dataDir,
+					},
+				},
+			},
+			"build.mikerybka.com": &util.BuildServer{
+				Workdir: "/root/builds",
+				Config: map[string]*util.BuildConfig{
+					"mikerybka/server": {
+						Type:      "go",
+						Path:      "/root/builds/src/mikerybka/server",
+						Out:       "/root/builds/latest/server",
+						OnSuccess: "cp /root/builds/latest/server && systemctl restart server",
+					},
+				},
+			},
 		},
 	}
 	panic(s.Start(email, certDir))
