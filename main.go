@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"os"
+	"os/exec"
+	"time"
 
 	"github.com/mikerybka/util"
 )
@@ -37,6 +40,11 @@ func main() {
 		dataDir = "data/schema.cafe"
 	}
 
+	go func() {
+		time.Sleep(time.Hour)
+		update()
+	}()
+
 	s := &util.MultiHostServer{
 		Hosts: map[string]http.Handler{
 			"api.schema.cafe": &util.MultiUserApp{
@@ -69,18 +77,18 @@ func main() {
 					},
 				},
 			},
-			"build.mikerybka.com": &util.BuildServer{
-				Workdir: "/root/builds",
-				Config: map[string]*util.BuildConfig{
-					"mikerybka/server": {
-						Type:      "go",
-						Path:      "/root/builds/src/mikerybka/server",
-						Out:       "/root/builds/latest/server",
-						OnSuccess: "cp /root/builds/latest/server && systemctl restart server",
-					},
-				},
-			},
 		},
 	}
 	panic(s.Start(email, certDir))
+}
+
+func update() {
+	script := "git pull && go get -u && git add --all && git commit -m update && git push && go build -o /usr/local/bin/server . && systemctl restart server"
+	cmd := exec.Command("bash", "-c", script)
+	cmd.Dir = "/root/server"
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Println(string(out))
+		fmt.Println(err)
+	}
 }
