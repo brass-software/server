@@ -74,6 +74,7 @@ func main() {
 					},
 				},
 			},
+			"mikerybka.dev": &Test{},
 		},
 	}
 	panic(s.Start(email, certDir))
@@ -93,4 +94,10 @@ func update() {
 		fmt.Println(string(out))
 		fmt.Println(err)
 	}
+}
+
+type Test struct{}
+
+func (t *Test) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintln(w, "hi")
 }
