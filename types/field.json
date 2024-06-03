@@ -1,0 +1,24 @@
+{
+    "Name": "field",
+    "PluralName": "fields",
+    "IsStruct": true,
+    "Fields": [
+        {
+            "ID": "id",
+            "Name": "id",
+            "Type": "string"
+        },
+        {
+            "ID": "name",
+            "Name": "name",
+            "Type": "string"
+        },
+        {
+            "ID": "type",
+            "Name": "type",
+            "Type": "string"
+        }
+    ],
+    "Methods": {},
+    "DefaultJSON": "{\"type\":\"string\"}"
+}

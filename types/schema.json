@@ -1,0 +1,19 @@
+{
+    "Name": "schema",
+    "PluralName": "schemas",
+    "IsStruct": true,
+    "Fields": [
+        {
+            "ID": "name",
+            "Name": "name",
+            "Type": "string"
+        },
+        {
+            "ID": "fields",
+            "Name": "fields",
+            "Type": "[]field"
+        }
+    ],
+    "Methods": {},
+    "DefaultJSON": "{}"
+}

@@ -44,6 +44,21 @@ func main() {
 
 	s := &util.MultiHostServer{
 		Hosts: map[string]http.Handler{
+			// "api.schema.cafe": &util.MultiUserApp{
+			// 	Twilio: &util.TwilioClient{
+			// 		AccountSID:  twilioAccountSID,
+			// 		AuthToken:   twilioAuthToken,
+			// 		PhoneNumber: twilioPhoneNumber,
+			// 	},
+			// 	AuthFiles: &util.LocalFileSystem{
+			// 		Root: authDir,
+			// 	},
+			// 	App: &util.SchemaCafe{
+			// 		Data: &util.LocalFileSystem{
+			// 			Root: dataDir,
+			// 		},
+			// 	},
+			// },
 			"api.schema.cafe": &util.MultiUserApp{
 				Twilio: &util.TwilioClient{
 					AccountSID:  twilioAccountSID,
@@ -53,24 +68,20 @@ func main() {
 				AuthFiles: &util.LocalFileSystem{
 					Root: authDir,
 				},
-				App: &util.SchemaCafe{
-					Data: &util.LocalFileSystem{
-						Root: dataDir,
-					},
-				},
-			},
-			"schema.cafe": &util.MultiUserApp{
-				Twilio: &util.TwilioClient{
-					AccountSID:  twilioAccountSID,
-					AuthToken:   twilioAuthToken,
-					PhoneNumber: twilioPhoneNumber,
-				},
-				AuthFiles: &util.LocalFileSystem{
-					Root: authDir,
-				},
-				App: &util.SchemaCafe{
-					Data: &util.LocalFileSystem{
-						Root: dataDir,
+				App: &util.WebAPI{
+					DataPath: dataDir,
+					Type: &util.Type{
+						IsMap: true,
+						ElemType: &util.Type{
+							IsStruct: true,
+							Fields: []util.Field{
+								{
+									ID:   "name",
+									Name: "Name",
+									Type: util.StringType,
+								},
+							},
+						},
 					},
 				},
 			},
