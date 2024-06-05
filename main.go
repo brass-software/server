@@ -1,11 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"os"
-	"os/exec"
-	"time"
 
 	"github.com/mikerybka/util"
 )
@@ -40,25 +37,8 @@ func main() {
 		dataDir = "data/schema.cafe"
 	}
 
-	go updateInAnHour()
-
 	s := &util.MultiHostServer{
 		Hosts: map[string]http.Handler{
-			// "api.schema.cafe": &util.MultiUserApp{
-			// 	Twilio: &util.TwilioClient{
-			// 		AccountSID:  twilioAccountSID,
-			// 		AuthToken:   twilioAuthToken,
-			// 		PhoneNumber: twilioPhoneNumber,
-			// 	},
-			// 	AuthFiles: &util.LocalFileSystem{
-			// 		Root: authDir,
-			// 	},
-			// 	App: &util.SchemaCafe{
-			// 		Data: &util.LocalFileSystem{
-			// 			Root: dataDir,
-			// 		},
-			// 	},
-			// },
 			"api.schema.cafe": &util.MultiUserApp{
 				Twilio: &util.TwilioClient{
 					AccountSID:  twilioAccountSID,
@@ -69,46 +49,56 @@ func main() {
 					Root: authDir,
 				},
 				App: &util.WebAPI{
-					DataPath: dataDir,
-					Type: &util.Type{
-						IsMap: true,
-						ElemType: &util.Type{
+					Types: map[string]util.Type{
+						"Schema": {
 							IsStruct: true,
 							Fields: []util.Field{
 								{
+									ID:   "id",
+									Name: "ID",
+									Type: "string",
+								},
+								{
 									ID:   "name",
 									Name: "Name",
-									Type: util.StringType,
+									Type: "string",
+								},
+								{
+									ID:   "fields",
+									Name: "Fields",
+									Type: "[]Field",
+								},
+							},
+						},
+						"Field": {
+							IsStruct: true,
+							Fields: []util.Field{
+								{
+									ID:   "id",
+									Name: "ID",
+									Type: "string",
+								},
+								{
+									ID:   "name",
+									Name: "Name",
+									Type: "string",
+								},
+								{
+									ID:   "type",
+									Name: "Type",
+									Type: "string",
 								},
 							},
 						},
 					},
+					RootType: "map[string]Schema",
+					Data: &util.LocalFileSystem{
+						Root: dataDir,
+					},
 				},
 			},
-			"mikerybka.dev": &Test{},
+			"mikerybka.dev": &util.PingServer{},
 		},
 	}
 	panic(s.Start(email, certDir))
-}
-
-func updateInAnHour() {
-	time.Sleep(time.Hour)
-	update()
-}
-
-func update() {
-	script := "git pull && go get -u && git add --all && git commit -m update && git push && go build -o /usr/local/bin/server . && systemctl restart server"
-	cmd := exec.Command("bash", "-c", script)
-	cmd.Dir = "/root/server"
-	out, err := cmd.CombinedOutput()
-	if err != nil {
-		fmt.Println(string(out))
-		fmt.Println(err)
-	}
-}
-
-type Test struct{}
-
-func (t *Test) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "hi")
 }
