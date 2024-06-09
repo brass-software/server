@@ -2,7 +2,7 @@ module github.com/brass-software/server
 
 go 1.22.1
 
-require github.com/mikerybka/util v0.0.0-20240609225232-73680fe88712
+require github.com/mikerybka/util v0.0.0-20240609225921-19ef3e7ef55c
 
 require (
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
