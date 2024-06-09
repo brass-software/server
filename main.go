@@ -131,11 +131,11 @@ func main() {
 					},
 				},
 			},
-			"www.schema.cafe": http.RedirectHandler("https://schema.cafe", http.StatusMovedPermanently),
-			"schema.cafe": &util.WebApp[*util.Schema]{
+			"schema.cafe": http.RedirectHandler("https://www.schema.cafe", http.StatusMovedPermanently),
+			"www.schema.cafe": &util.WebApp[*util.Schema]{
 				Name:        "Schema Cafe",
-				Description: "Schemas!!!",
-				Author:      "Michael Edward Rybka",
+				Description: "Schema database",
+				Author:      "Mike Rybka",
 				Keywords:    []string{"software", "developer", "tools"},
 				Favicon:     cafeIcon,
 				Types: map[string]util.Type{
