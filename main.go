@@ -40,8 +40,20 @@ func main() {
 	if dataDir == "" {
 		dataDir = "data/schema.cafe"
 	}
+	adminPhone := os.Getenv("ADMIN_PHONE")
+	if adminPhone == "" {
+		panic("missing ADMIN_PHONE")
+	}
+
+	twilioClient := &util.TwilioClient{
+		AccountSID:  twilioAccountSID,
+		AuthToken:   twilioAuthToken,
+		PhoneNumber: twilioPhoneNumber,
+	}
 
 	s := &util.MultiHostServer{
+		TwilioClient: twilioClient,
+		AdminPhone:   adminPhone,
 		Hosts: map[string]http.Handler{
 			"api.schema.cafe": &util.MultiUserApp{
 				Twilio: &util.TwilioClient{
@@ -180,11 +192,7 @@ func main() {
 						},
 					},
 				},
-				TwilioClient: &util.TwilioClient{
-					AccountSID:  twilioAccountSID,
-					AuthToken:   twilioAuthToken,
-					PhoneNumber: twilioPhoneNumber,
-				},
+				TwilioClient: twilioClient,
 				Files: &util.LocalFileSystem{
 					Root: authDir,
 				},
