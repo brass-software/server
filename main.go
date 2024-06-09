@@ -1,11 +1,15 @@
 package main
 
 import (
+	_ "embed"
 	"net/http"
 	"os"
 
 	"github.com/mikerybka/util"
 )
+
+//go:embed assets/cafe.ico
+var cafeIcon []byte
 
 func main() {
 	email := os.Getenv("EMAIL")
@@ -50,6 +54,18 @@ func main() {
 				},
 				App: &util.WebAPI{
 					Types: map[string]util.Type{
+						"string": {
+							IsScalar: true,
+							Kind:     "string",
+						},
+						"int": {
+							IsScalar: true,
+							Kind:     "int",
+						},
+						"bool": {
+							IsScalar: true,
+							Kind:     "bool",
+						},
 						"Schema": {
 							IsStruct: true,
 							Fields: []util.Field{
@@ -66,7 +82,7 @@ func main() {
 								{
 									ID:   "fields",
 									Name: "Fields",
-									Type: "[]Field",
+									Type: "FieldList",
 								},
 							},
 						},
@@ -90,11 +106,86 @@ func main() {
 								},
 							},
 						},
+						"FieldList": {
+							IsArray:  true,
+							ElemType: "Field",
+						},
+						"SchemaList": {
+							IsMap:    true,
+							ElemType: "Schema",
+						},
+						"Org": {
+							IsStruct: true,
+							Fields: []util.Field{
+								{
+									ID:   "schemas",
+									Name: "Schemas",
+									Type: "SchemaList",
+								},
+							},
+						},
 					},
 					RootType: "map[string]Schema",
 					Data: &util.LocalFileSystem{
 						Root: dataDir,
 					},
+				},
+			},
+			"schema.cafe": &util.WebApp[*util.Schema]{
+				Name:        "Schema Cafe",
+				Description: "Schemas!!!",
+				Author:      "Michael Edward Rybka",
+				Keywords:    []string{"software", "developer", "tools"},
+				Favicon:     cafeIcon,
+				Types: map[string]util.Type{
+					"Schema": {
+						IsStruct: true,
+						Fields: []util.Field{
+							{
+								ID:   "id",
+								Name: "ID",
+								Type: "string",
+							},
+							{
+								ID:   "name",
+								Name: "Name",
+								Type: "string",
+							},
+							{
+								ID:   "fields",
+								Name: "Fields",
+								Type: "[]Field",
+							},
+						},
+					},
+					"Field": {
+						IsStruct: true,
+						Fields: []util.Field{
+							{
+								ID:   "id",
+								Name: "ID",
+								Type: "string",
+							},
+							{
+								ID:   "name",
+								Name: "Name",
+								Type: "string",
+							},
+							{
+								ID:   "type",
+								Name: "Type",
+								Type: "string",
+							},
+						},
+					},
+				},
+				TwilioClient: &util.TwilioClient{
+					AccountSID:  twilioAccountSID,
+					AuthToken:   twilioAuthToken,
+					PhoneNumber: twilioPhoneNumber,
+				},
+				Files: &util.LocalFileSystem{
+					Root: authDir,
 				},
 			},
 			"mikerybka.dev": &util.PingServer{},
