@@ -131,6 +131,7 @@ func main() {
 					},
 				},
 			},
+			"www.schema.cafe": http.RedirectHandler("https://schema.cafe", http.StatusMovedPermanently),
 			"schema.cafe": &util.WebApp[*util.Schema]{
 				Name:        "Schema Cafe",
 				Description: "Schemas!!!",
