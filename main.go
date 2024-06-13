@@ -198,6 +198,7 @@ func main() {
 				},
 			},
 			"mikerybka.dev": &util.PingServer{},
+			"mikerybka.com": &util.PingServer{},
 		},
 	}
 	panic(s.Start(email, certDir))
