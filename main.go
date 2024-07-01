@@ -4,7 +4,7 @@ import "github.com/mikerybka/util"
 
 func main() {
 	server := &util.Server{
-		DataDir: util.EnvVar("DATA_DIR", "/root"),
+		DataFile: util.EnvVar("DATA_FILE", "/root/data.json"),
 		TwilioClient: &util.TwilioClient{
 			AccountSID:  util.RequireEnvVar("TWILIO_ACCOUNT_SID"),
 			AuthToken:   util.RequireEnvVar("TWILIO_AUTH_TOKEN"),
